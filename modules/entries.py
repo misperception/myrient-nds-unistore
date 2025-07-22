@@ -11,12 +11,12 @@ def create_store(region: str, index: int):
             "author": "misper_ception",
             "description": "A UniStore for downloading NDS games through Myrient",
             "file": f"myrient-nds-{region.lower()}.unistore",
-            "url": f" ",
+            "url": f"https://raw.githubusercontent.com/misperception/myrient-nds-unistore/master/unistore/myrient-nds-{region.lower()}.unistore",
             "sheet": [f"myrient-nds-{region.lower()}-{i}.t3x" for i in range(index//512 + 1)],
             "sheetURL": [f"https://raw.githubusercontent.com/misperception/myrient-nds-unistore/master/unistore/icons/myrient-nds-{region.lower()}-{i}.t3x"
                          for i in range(index//512 + 1)],
             "version": 3,
-            "revision": 2
+            "revision": 3
         },
         "storeContent": []
     }

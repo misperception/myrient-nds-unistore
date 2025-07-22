@@ -6,8 +6,9 @@
         "file": "myrient-nds-manager.unistore",
         "url": "https://raw.githubusercontent.com/misperception/myrient-nds-unistore/master/manager_builds/myrient-nds-manager.unistore",
         "sheet": "myrient-nds-manager.t3x",
+        "sheetURL": "https://github.com/misperception/myrient-nds-unistore/raw/refs/heads/master/unistore/icons/myrient-nds-manager.t3x",
         "version": 3,
-        "revision": 2
+        "revision": 3
     },
     "storeContent" : [
         {
