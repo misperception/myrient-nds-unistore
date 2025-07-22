@@ -18,6 +18,9 @@ First, open Universal-Updater, then go to **Settings** -> **Select UniStore**. A
 
 After that, select the store name (**myrient-nds-manager.unistore**). Once loaded into the interface (see below), select the stores you want and install them. Then, go to **Settings** -> **Select UniStore** and select the store you downloaded. 
 
+> [!WARNING]
+> If scanning the QR code crashes your system, try tapping on the keyboard icon instead, and input the following URL: `github.com/misperception/myrient-nds-unistore/raw/master/unistore/myrient-nds-manager.unistore`
+> If everything else fails, try extracting the .zip file in the [releases](https://github.com/misperception/myrient-nds-unistore/releases/latest) section to the root of your SD file.
 
 ![Top screen in Myrient NDS Store Manager](assets/top.bmp)
 ![Bottom screen in Myrient NDS Store Manager](assets/bottom.bmp)
