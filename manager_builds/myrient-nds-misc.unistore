@@ -4,17 +4,17 @@
         "author": "misper_ception",
         "description": "A UniStore for downloading NDS games through Myrient",
         "file": "myrient-nds-misc.unistore",
-        "url": " ",
+        "url": "https://raw.githubusercontent.com/misperception/myrient-nds-unistore/refs/heads/master/unistore/myrient-nds-misc.unistore",
         "sheet": [
             "myrient-nds-misc-0.t3x",
             "myrient-nds-misc-1.t3x"
         ],
         "sheetURL": [
-            "https://raw.githubusercontent.com/misperception/myrient-nds-unistore/master/unistore/icons/myrient-nds-misc-0.t3x",
-            "https://raw.githubusercontent.com/misperception/myrient-nds-unistore/master/unistore/icons/myrient-nds-misc-1.t3x"
+            "https://github.com/misperception/myrient-nds-unistore/raw/refs/heads/master/unistore/icons/myrient-nds-misc-0.t3x",
+            "https://github.com/misperception/myrient-nds-unistore/raw/refs/heads/master/unistore/icons/myrient-nds-misc-1.t3x"
         ],
         "version": 3,
-        "revision": 2
+        "revision": 1
     },
     "storeContent": [
         {

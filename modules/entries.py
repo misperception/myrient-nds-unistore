@@ -11,10 +11,12 @@ def create_store(region: str, index: int):
             "author": "misper_ception",
             "description": "A UniStore for downloading NDS games through Myrient",
             "file": f"myrient-nds-{region.lower()}.unistore",
-            # "url": "https://raw.githubusercontent.com/misperception/test/refs/heads/master/myrient-nds.unistore",
+            "url": f" ",
             "sheet": [f"myrient-nds-{region.lower()}-{i}.t3x" for i in range(index//512 + 1)],
+            "sheetURL": [f"https://raw.githubusercontent.com/misperception/myrient-nds-unistore/master/unistore/icons/myrient-nds-{region.lower()}-{i}.t3x"
+                         for i in range(index//512 + 1)],
             "version": 3,
-            "revision": 0
+            "revision": 2
         },
         "storeContent": []
     }
@@ -27,14 +29,14 @@ def generate_entry(title: str, index: int) -> dict:
     entry = {
         "info": {
             "title": sanitize(title),
-            "author": "$author",
-            "description": "$description",
-            "category": ["a"],
+            # "author": "$author",
+            # "description": "$description",
+            # "category": ["a"],
             "console": ["DS"],
             "icon_index": index%512,
             "sheet_index": index//512,
-            "last_updated": "$release",
-            "version": "$version"
+            # "last_updated": "$release",
+            # "version": "$version"
         },
         title: [
             {
