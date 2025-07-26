@@ -1,57 +1,76 @@
-import os, requests, re
+import zipfile
+
+import os, requests
 from zipfile import ZipFile
 from tools.bannergif import bannergif
-from modules.misc import sanitize
-from shutil import copy
 from modules.databases import get_crc
 
-def generate_t3x_script(path: str, filename: str):
-    if not os.path.exists("generate_t3x.sh"):
-        with open("generate_t3x.sh", "w") as file: file.write("#! /bin/bash\n\n")
-        os.makedirs("unistore/icons", exist_ok=True)
-    with open("generate_t3x.sh", "a") as file:
-        file.write(f"tex3ds -i {f"{path}/{filename}"} -o \"unistore/icons/{filename.replace(".t3s", ".t3x")}\" > /dev/null\n")
+class T3S:
+    path: str
+    filename: str
+    max_entries: int
+    index: int
+    region: str
 
-def make_t3s(region: str, tex_index: int):
-    path = f"icons/{region}"
-    filename = f"myrient-nds-{region.lower()}-{tex_index}.t3s"
-    os.makedirs(path, exist_ok=True)
-    if os.path.exists(f"{path}/{filename}"): return
-    with open(f"{path}/{filename}", "x+") as file:
-        file.write("--atlas -f rgba -z auto\n\n")
-    generate_t3x_script(path, filename)
+    def __init__(self, region, index, max_entries):
+        self.max_entries = max_entries
+        self.index = index // self.max_entries
+        self.region = region.lower()
+        self.filename = f"myrient-nds-{self.region}-{self.index}.t3s"
+        self.path = f"icons/{region}/{self.filename}"
 
-def append_to_t3s(region: str, title: str, tex_index: int = 0):
-    title = sanitize(title)
-    with open(f"icons/{region}/myrient-nds-{region.lower()}-{tex_index}.t3s", "a") as file:
-        file.write(f"\"{title}.png\"\n")
+        if os.path.exists(self.path): return
+        with open(self.path, "x+") as file:
+            file.write("--atlas -f rgba -z auto\n\n")
+        self.generate_t3x_script()
 
-def get_icon(title: str, region: str, index: int, databases: dict):
-    title = sanitize(title)
-    path = f"icons/{region}/{title}.png"
-    make_t3s(region, index//512)
-    print(f"Fetching icon for {region} entry index {index}...")
-    if os.path.exists(path):
-        print(f"Icon exists, skipping")
-        append_to_t3s(region, title, index//512)
-        return
-    alt_path = re.sub(r"\(Rev .\)", "", path).strip()
-    if os.path.exists(alt_path):
-        print(f"Reusable icon exists, copying")
-        copy(alt_path, path)
-        append_to_t3s(region, title, index//512)
-        return
-    crc = get_crc(title, databases)
-    try:
-        id = image_id_from_crc(crc, databases)
-        url = url_from_image_id(id)
-        image = requests.get(url).content
-        with open(path, "wb") as icon:
-            icon.write(image)
-    except Exception:
-        print("Title not found in ADVANsCEne database, getting icon from ROM...")
-        fallback_icon(title, region)
-    append_to_t3s(region, title, index//512)
+    def append(self, name):
+        with open(self.path, "a+") as file:
+            file.write(f"\"{name}\"\n")
+
+    def generate_t3x_script(self):
+        if not os.path.exists("generate_t3x.sh"):
+            with open("generate_t3x.sh", "w") as file: file.write("#! /bin/bash\n\n")
+            os.makedirs("unistore/icons", exist_ok=True)
+        with open("generate_t3x.sh", "a") as file:
+            file.write(f"tex3ds -i {self.path} -o \"unistore/icons/{self.filename.replace(".t3s", ".t3x")}\" > /dev/null\n")
+
+class Icon:
+    icon_index: int
+    path: str
+    filename: str
+    t3s: T3S
+
+    def __init__(self, path, filename, index):
+        self.icon_index = index % 512
+        self.path = path + filename
+        self.filename = filename
+        os.makedirs(path, exist_ok=True)
+
+    @classmethod
+    def get_icon(cls, title: str, region: str, index: int, databases: dict):
+        icon = cls(f"icons/{region}/", f"{title}.png", index)
+        icon.t3s = T3S(region, index, 512)
+        print(f"Fetching icon for {title}...")
+
+        if os.path.exists(icon.path):
+            print(f"Icon exists, skipping")
+            icon.t3s.append(icon.filename)
+            return icon
+
+        crc = get_crc(title, databases)
+        try:
+            id = image_id_from_crc(crc, databases)
+            url = url_from_image_id(id)
+            data = requests.get(url).content
+            with open(icon.path, "wb") as file:
+                file.write(data)
+        except Exception:
+            print("Title not found in ADVANsCEne database, getting icon from ROM...")
+            fallback_icon(title, region)
+
+        icon.t3s.append(icon.filename)
+        return icon
 
 def download_rom(title: str):
     os.makedirs("temp", exist_ok=True)
@@ -59,7 +78,11 @@ def download_rom(title: str):
     # Download and extract zip file
     with open("temp/temp.zip", "w+b") as zip:
         zip.write(data.content)
-        name = ZipFile(zip).extract(member=f"{title+".nds"}", path="temp")
+        try: name = ZipFile(zip).extract(member=f"{title+".nds"}", path="temp")
+        except zipfile.BadZipfile:
+            print("Retrying...")
+            download_rom(title)
+            return
     # Rename nds file and delete zip file
     os.remove("temp/temp.zip")
     os.rename(name, "temp/temp.nds")
