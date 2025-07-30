@@ -104,7 +104,7 @@ class Store:
                 "sheetURL": [f"https://raw.githubusercontent.com/misperception/myrient-nds-unistore/master/unistore/icons/{sheet}"
                              for sheet in self.sheets],
                 "version": 3,
-                "revision": 3
+                "revision": 4
             },
             "storeContent": [entry.entry for entry in self.entries]
         }
