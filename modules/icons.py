@@ -1,5 +1,4 @@
 import zipfile
-
 import os, requests
 from zipfile import ZipFile
 from tools.bannergif import bannergif
@@ -22,18 +21,10 @@ class T3S:
         if os.path.exists(self.path): return
         with open(self.path, "x+") as file:
             file.write("--atlas -f rgba -z auto\n\n")
-        self.generate_t3x_script()
 
     def append(self, name):
         with open(self.path, "a+") as file:
             file.write(f"\"{name}\"\n")
-
-    def generate_t3x_script(self):
-        if not os.path.exists("generate_t3x.sh"):
-            with open("generate_t3x.sh", "w") as file: file.write("#! /bin/bash\n\n")
-            os.makedirs("unistore/icons", exist_ok=True)
-        with open("generate_t3x.sh", "a") as file:
-            file.write(f"tex3ds -i {self.path} -o \"unistore/icons/{self.filename.replace(".t3s", ".t3x")}\" > /dev/null\n")
 
 class Icon:
     icon_index: int

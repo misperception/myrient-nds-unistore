@@ -1,4 +1,5 @@
-import os, json
+import os, json, subprocess
+from shutil import which
 from urllib.parse import quote
 from modules.misc import sanitize, get_region
 from modules.icons import Icon
@@ -109,7 +110,17 @@ class Store:
         }
         return store
 
+    @property
+    def t3s(self):
+        return {entry.icon.t3s for entry in self.entries}
+
     def create_unistore(self):
         os.makedirs("unistore", exist_ok=True)
         with open(self.path, "w") as file:
             json.dump(self.dict, file, indent=4)
+        if not which("tex3ds"):
+            print("devkitPro toolchain not detected, skipping t3x creation...")
+        print("Compressing icons, this may take a while...")
+        for t3s, t3x in zip(self.t3s, self.sheets):
+            subprocess.run(["tex3ds", "-i", f"{t3s.path}", "-o", f"unistore/icons/{t3x}"], stdout = subprocess.DEVNULL)
+            print(f"{t3x} created.")
