@@ -112,15 +112,16 @@ class Store:
 
     @property
     def t3s(self):
-        return {entry.icon.t3s for entry in self.entries}
+        return {entry.icon.t3s.path for entry in self.entries}
 
     def create_unistore(self):
         os.makedirs("unistore/icons", exist_ok=True)
         with open(self.path, "w") as file:
             json.dump(self.dict, file, indent=4)
-        if not which("tex3ds"):
+        if which("tex3ds") is None:
             print("devkitPro toolchain not detected, skipping t3x creation...")
+            return
         print("Compressing icons, this may take a while...")
         for t3s, t3x in zip(self.t3s, self.sheets):
-            subprocess.run(["tex3ds", "-i", f"{t3s.path}", "-o", f"unistore/icons/{t3x}"], stdout = subprocess.DEVNULL)
+            subprocess.run(["tex3ds", "-i", f"{t3s}", "-o", f"unistore/icons/{t3x}"], stdout = subprocess.DEVNULL)
             print(f"{t3x} created.")
