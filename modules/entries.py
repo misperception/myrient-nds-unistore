@@ -115,7 +115,7 @@ class Store:
         return {entry.icon.t3s for entry in self.entries}
 
     def create_unistore(self):
-        os.makedirs("unistore", exist_ok=True)
+        os.makedirs("unistore/icons", exist_ok=True)
         with open(self.path, "w") as file:
             json.dump(self.dict, file, indent=4)
         if not which("tex3ds"):
