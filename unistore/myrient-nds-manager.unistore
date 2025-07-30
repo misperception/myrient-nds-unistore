@@ -4,11 +4,11 @@
         "author": "misper_ception",
         "description": "The Myrient DS Store Manager",
         "file": "myrient-nds-manager.unistore",
-        "url": "https://raw.githubusercontent.com/misperception/myrient-nds-unistore/master/manager_builds/myrient-nds-manager.unistore",
+        "url": "https://raw.githubusercontent.com/misperception/myrient-nds-unistore/master/unistore/myrient-nds-manager.unistore",
         "sheet": "myrient-nds-manager.t3x",
-        "sheetURL": "https://github.com/misperception/myrient-nds-unistore/raw/refs/heads/master/unistore/icons/myrient-nds-manager.t3x",
+        "sheetURL": "https://raw.githubusercontent.com/misperception/myrient-nds-unistore/master/unistore/icons/myrient-nds-manager.t3x",
         "version": 3,
-        "revision": 3
+        "revision": 4
     },
     "storeContent" : [
         {
@@ -24,7 +24,7 @@
             "Download from GitHub": [
                 {
                     "type": "downloadFile",
-                    "file": "https://raw.githubusercontent.com/misperception/myrient-nds-unistore/master/manager_builds/myrient-nds-europe.unistore",
+                    "file": "https://raw.githubusercontent.com/misperception/myrient-nds-unistore/master/unistore/myrient-nds-europe.unistore",
                     "message": "Downloading the store...",
                     "output": "sdmc:/3ds/Universal-Updater/stores/myrient-nds-europe.unistore"
                 }
@@ -43,7 +43,7 @@
             "Download from GitHub": [
                 {
                     "type": "downloadFile",
-                    "file": "https://raw.githubusercontent.com/misperception/myrient-nds-unistore/master/manager_builds/myrient-nds-japan.unistore",
+                    "file": "https://raw.githubusercontent.com/misperception/myrient-nds-unistore/master/unistore/myrient-nds-japan.unistore",
                     "message": "Downloading the store...",
                     "output": "sdmc:/3ds/Universal-Updater/stores/myrient-nds-japan.unistore"
                 }
@@ -62,7 +62,7 @@
             "Download from GitHub": [
                 {
                     "type": "downloadFile",
-                    "file": "https://raw.githubusercontent.com/misperception/myrient-nds-unistore/master/manager_builds/myrient-nds-misc.unistore",
+                    "file": "https://raw.githubusercontent.com/misperception/myrient-nds-unistore/master/unistore/myrient-nds-misc.unistore",
                     "message": "Downloading the store...",
                     "output": "sdmc:/3ds/Universal-Updater/stores/myrient-nds-misc.unistore"
                 }
@@ -81,7 +81,7 @@
             "Download from GitHub": [
                 {
                     "type": "downloadFile",
-                    "file": "https://raw.githubusercontent.com/misperception/myrient-nds-unistore/master/manager_builds/myrient-nds-usa.unistore",
+                    "file": "https://raw.githubusercontent.com/misperception/myrient-nds-unistore/master/unistore/myrient-nds-usa.unistore",
                     "message": "Downloading the store...",
                     "output": "sdmc:/3ds/Universal-Updater/stores/myrient-nds-usa.unistore"
                 }

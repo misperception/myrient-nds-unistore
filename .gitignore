@@ -2,3 +2,8 @@
 /icons/
 /.venv/
 */__pycache__/
+/uv.lock
+/.python-version
+/flake.nix
+/flake.lock
+/.idea/*
