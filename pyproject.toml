@@ -1,0 +1,12 @@
+[project]
+name = "myrient-nds-unistore"
+version = "1.2"
+description = "A convenient NDS ROM downloading tool made with Universal-Updater."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "beautifulsoup4>=4.13.4",
+    "libscrc>=1.8.1",
+    "pillow>=11.3.0",
+    "requests>=2.32.4",
+]

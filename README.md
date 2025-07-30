@@ -24,3 +24,52 @@ After that, select the store name (**myrient-nds-manager.unistore**). Once loade
 
 ![Top screen in Myrient NDS Store Manager](assets/top.bmp)
 ![Bottom screen in Myrient NDS Store Manager](assets/bottom.bmp)
+
+## Building
+If you want to build the UniStores yourself, follow these steps:
+
+### Windows
+
+1. Follow the [installation steps](https://devkitpro.org/wiki/Getting_Started#Windows) for the devkitPro toolchain.
+2. Launch MSYS and install Python and pip using the following command: `pacman -S python python-pip gcc`
+3. Follow the instructions for [Unix-like systems](#Linux-and-macOS) from step 3.
+
+### Linux and macOS
+
+1. Follow the [installation steps](https://devkitpro.org/wiki/Getting_Started#Windows) for the devkitPro toolchain.
+2. If not installed already, install Python, pip and gcc using your distribution's package manager.
+3. Clone the repository and open it: `git clone https://github.com/misperception/myrient-nds-unistore.git && cd myrient-nds-unistore`
+4. Either:
+   * Install dependencies locally: `python -m pip install -r requirements.txt`
+   * Create a virtual environment and install packages: `python -m venv .venv && source .venv/bin/activate && python -m pip install -r requirements.txt`
+   * Install packages using Poetry (if installed): `poetry install`
+5. Run the program:
+> [!NOTE]
+> If using Poetry, run the project with the following command: `poetry run python main.py`. Furthermore, if using uv, use the following command: `uv run main.py`
+
+### Nix
+
+The repository has a Nix flake for ease of use: make sure you have flakes enabled in your configuration. (https://nixos.wiki/wiki/flakes) 
+
+1. Clone the repository: `git clone https://github.com/misperception/myrient-nds-unistore.git && cd myrient-nds-unistore`
+2. Activate the Nix shell using the `nix develop` command.
+3. Run the program using the provided uv installation: `uv run main.py`.
+
+### Docker
+
+If installing the devkitPro toolchain is not an option, the UniStores can be built using Docker. Simply follow these steps:
+1. Install Docker for your system. (https://docs.docker.com/get-started/get-docker/)
+2. Clone the repository: `git clone https://github.com/misperception/myrient-nds-unistore.git && cd myrient-nds-unistore`
+3. Build the image using the following command: `docker build -t myrient-nds-unistore .`
+4. Once the image is built, run the container: `docker run -d --name myrient-nds-unistore myrient-nds-unistore`.
+5. When the container stops, copy the `unistore` folder from it using the `docker cp myrient-nds-unistore:/app/unistore ./result` command.
+
+***
+
+Thanks to @Epicpkmn11 for her awesome bannergif.py tool.
+
+Thanks to the @Universal-Team for their amazing tool! 
+
+I'm also incredibly thankful to the Erista team for their awesome [Myrient](https://myrient.erista.me) platform, go check it out!
+
+And of course, thank you.

@@ -18,7 +18,9 @@
                 overlays = [devkitNix.overlays.default];
             };
         in {
-            devShells.default = pkgs.mkShell.override {stdenv = pkgs.devkitNix.stdenvARM;} {};
+            devShells.default = pkgs.mkShell.override {stdenv = pkgs.devkitNix.stdenvARM;} {
+                buildInputs = with pkgs; [ python313 uv gcc ];
+	        };
         }
         );
 }
