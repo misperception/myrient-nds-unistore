@@ -104,7 +104,7 @@ class Store:
                 "sheetURL": [f"https://raw.githubusercontent.com/misperception/myrient-nds-unistore/master/unistore/icons/{sheet}"
                              for sheet in self.sheets],
                 "version": 3,
-                "revision": 4
+                "revision": 5
             },
             "storeContent": [entry.entry for entry in self.entries]
         }
@@ -112,7 +112,10 @@ class Store:
 
     @property
     def t3s(self):
-        return {entry.icon.t3s.path for entry in self.entries}
+        sheets = {entry.icon.t3s.path for entry in self.entries}
+        sheets = list(sheets)
+        sheets.sort()
+        return sheets
 
     def create_unistore(self):
         os.makedirs("unistore/icons", exist_ok=True)
