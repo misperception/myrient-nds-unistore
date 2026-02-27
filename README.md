@@ -1,3 +1,6 @@
+> [!CAUTION]
+> [Myrient](https://myrient.erista.me) is shutting down as of 31 of March 2026, and so this tool will no longer function in any capacity. Thank you to the Erista team for all these years of service. If possible, please [donate](https://myrient.erista.me/donate/) to the team.
+
 # Myrient NDS Store
 A convenient NDS ROM downloading tool made with Universal-Updater.
 ***
